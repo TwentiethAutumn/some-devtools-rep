@@ -18,11 +18,7 @@ async function main() {
   const response = await axios.get(url.toString());
   const games = response.data.response.docs;
   for (const game of games) {
-    console.log({
-      product_code_ss: game.product_code_ss[0],
-      title: game.title,
-      publisher: game.publisher,
-    });
+    console.log(game.product_code_ss[0]);
     await prisma.game.upsert({
       where: { id: game.product_code_ss[0] },
       update: {},
@@ -30,6 +26,7 @@ async function main() {
         id: game.product_code_ss[0],
         title: game.title.trim(),
         description: game.excerpt.trim(),
+        price: game.price_regular_f,
         image: game.image_url_sq_s,
         cover: game.image_url_h2x1_s.replace('image500w', 'image1600w'),
         rating: game.age_rating_sorting_i,

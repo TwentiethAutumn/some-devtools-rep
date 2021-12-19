@@ -14,6 +14,7 @@ model Game {
   id                    String  @id             // product_code_ss[0]
   title                 String                  // title
   description           String?                 // excerpt
+  price                 Int?                    // price_regular_f
   image                 String                  // image_url_sq_s
   cover                 String                  // image_url_h2x1_s
   rating                Int                     // age_rating_sorting_i
