@@ -6,7 +6,7 @@ import { Game } from '@prisma/client';
 export class GamesService {
   constructor(private prisma: PrismaService) {}
 
-  findAll(): Promise<Game[]> {
+  async findAll(): Promise<Game[]> {
     return this.prisma.game.findMany();
   }
 
@@ -19,7 +19,7 @@ export class GamesService {
     });
   }
 
-  findOne(id: string): Promise<Game | null> {
+  async findOne(id: string): Promise<Game | null> {
     return this.prisma.game.findFirst({
       where: { id },
     });
