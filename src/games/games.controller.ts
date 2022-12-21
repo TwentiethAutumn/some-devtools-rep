@@ -1,4 +1,4 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Controller, Get, Param, ParseIntPipe, Query } from '@nestjs/common';
 import { GamesService } from './games.service';
 
 @Controller('games')
@@ -6,8 +6,11 @@ export class GamesController {
   constructor(private readonly gamesService: GamesService) {}
 
   @Get()
-  findAll() {
-    return this.gamesService.findAll();
+  findAll(
+    @Query('skip', ParseIntPipe) skip: number,
+    @Query('take', ParseIntPipe) take: number,
+  ) {
+    return this.gamesService.findAll(skip, take);
   }
 
   @Get('random')

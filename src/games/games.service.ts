@@ -6,8 +6,8 @@ import { Game } from '@prisma/client';
 export class GamesService {
   constructor(private prisma: PrismaService) {}
 
-  findAll(): Promise<Game[]> {
-    return this.prisma.game.findMany();
+  async findAll(skip: number, take: number): Promise<Game[]> {
+    return this.prisma.game.findMany({ skip, take });
   }
 
   async findRandom(): Promise<Game> {
@@ -19,7 +19,7 @@ export class GamesService {
     });
   }
 
-  findOne(id: string): Promise<Game | null> {
+  async findOne(id: string): Promise<Game | null> {
     return this.prisma.game.findFirst({
       where: { id },
     });
